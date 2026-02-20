@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: fastcode
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python web_app.py --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: OPENAI_API_KEY
+        sync: false  # Set manually in dashboard
+      - key: MODEL
+        value: gpt-4
+      - key: BASE_URL
+        value: https://api.openai.com/v1
+    disk:
+      name: fastcode-data
+      mountPath: /opt/render/project/src/data
+      sizeGB: 1
