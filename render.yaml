@@ -4,17 +4,13 @@ services:
     runtime: python
     plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: python web_app.py --host 0.0.0.0 --port $PORT
+    startCommand: bash render-start.sh
     envVars:
       - key: PYTHON_VERSION
         value: 3.12.0
       - key: OPENAI_API_KEY
-        sync: false  # Set manually in dashboard
+        sync: false
       - key: MODEL
-        value: gpt-4
+        value: google/gemini-2.5-flash-preview
       - key: BASE_URL
-        value: https://api.openai.com/v1
-    disk:
-      name: fastcode-data
-      mountPath: /opt/render/project/src/data
-      sizeGB: 1
+        value: https://openrouter.ai/api/v1
